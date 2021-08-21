@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Trip in</title>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Prata&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/favicons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicons/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicons/android-chrome-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicons/android-chrome-512x512.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/favicons/favicon-32x32.png' %}" sizes="32x32">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicons/favicon.ico' %}">
+    <meta name="msapplication-TileColor" content="#151515">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/checkout/">
+
+    <!-- Bootstrap core CSS -->
+
+
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+
+
+    <meta name="theme-color" content="#151515">
+</head>
+
+<body>
+    <div class="container">
+        <div class="top_panel inversion">
+            <div class="wrap">
+                <div class="wrap_float">
+                    
+                    <div class="left">
+                        <div class="search_btn"></div>
+                        <a href="/" class="logo">
+                            <img src="{% static 'img/logo-black.svg' %}" alt="">
+                        </a>
+                    </div>
+                    <div class="menu_wrap" id="menu_wrap">
+                        <div class="scroll">
+                            <div class="center">
+                                <div class="menu">
+                                    <ul>
+                                        <li><a href="/"><span>Home</span></a></li>
+                                        <li class="dropdown_li">
+                                            <a href="#" class="active"><span>Treck list</span></a>
+                                            <ul class="dropdown_ul">
+                                            {% for trekcaats in trekcat %}
+                                                <li><a href="{% url 'choosetreck'%}?category={{trekcaats.category_name}}">{{trekcaats.category_name}}</a></li>
+                                            {% endfor %}   
+                                               </ul>
+                                        </li>
+                                        <li><a href="{% url 'aboutus' %}"><span>About Us</span></a></li>
+                                        
+                                        <li class="dropdown_li">
+                                            <a href="#"><span>Blog</span></a>
+                                            <ul class="dropdown_ul">
+                                                <li><a href="blog-full-width.html">Blog Full With</a></li>
+                                                <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
+                                                <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
+                                                <li><a href="blog-search-results.html">Search Result</a></li>
+                                                <li><a href="blog-search-results-not-found.html">Search Nothing Found</a></li>
+                                                <li><a href="blog-single-right-sidebar.html">Blog Single Right Sidebar</a></li>
+                                                <li><a href="blog-single-left-sidebar.html">Blog Single Left Sidebar</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="{% url 'contactus' %}"><span>Contacts</span></a></li>
+                                    </ul>
+                                    <div class="mobile_content">
+                                      
+                                        <div class="tel">
+                                            <a href="tel:+0034411345777">+ 1909 202 0119</a>
+                                            <p>Round the clock support</p>
+                                        </div>
+                                        <div class="social">
+                                            <a href="#" class="link facebook"><span></span></a>
+                                            <a href="#" class="link instagram"><span></span></a>
+                                            <a href="#" class="link pinterest"><span></span></a>
+                                            <a href="#" class="link twitter"><span></span></a>
+                                            <a href="#" class="link youtube"><span></span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="close" id="menu-close">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div class="tel"><a href="tel:+19092020119"><span>+ 1909 202 0119</span></a></div>
+                                
+                            </div>
+                            <div class="user" id="userblock">
+                                <div class="userlink" id="userlink"></div>
+                                <div class="usermenu" id="usermenu">
+                                    <ul>
+                                    {% if not request.user.is_authenticated  %}
+                                        <li><a href="{% url 'loginauth'%}" >Login</a></li>
+                                        <li><a href="{% url 'signup' %}" >Registration</a></li>
+                                        <li><a href="#" >Forgot password?</a></li>
+                                        
+                                    {% else %}
+                                        <li><a href="{% url 'logut' %}">Logout</a></li>
+                                    {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mobile_btn" id="mobile_btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% block body %}{% endblock body %}
+
+<!--Footer part-->
+<div class="footer">
+            <div class="wrap">
+                <div class="wrap_float">
+                    <div class="footer_top">
+                        <div class="left">
+                            <div class="col">
+                                <div class="_title m_title">Travel list</div>
+                                <ul>
+                                    <li><a href="travel-list-full-width.html">Travel list Full With</a></li>
+                                    <li><a href="travel-list-right-sidebar.html">Travel list Right Sidebar</a></li>
+                                    <li><a href="travel-list-left-sidebar.html">Travel list Left Sidebar</a></li>
+                                    <li><a href="travel-list-image-header.html">Travel list Full With Image Header</a></li>
+                                    <li><a href="search-results.html">Search Result</a></li>
+                                    <li><a href="search-results-not-found.html">Search Nothing Found</a></li>
+                                    <li><a href="tour-page-right-sidebar.html">Tour page Right Sidebar</a></li>
+                                    <li><a href="tour-page-left-sidebar.html">Tour page Left Sidebar</a></li>
+                                    <li><a href="tour-page-right-sidebar-width-reply.html">Tour page with reply form</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <div class="_title m_title">Page</div>
+                                <ul>
+                                    <li><a href="stories-full-width.html">Stories Full With</a></li>
+                                    <li><a href="story.html">Stories Single</a></li>
+                                    <li><a href="stories-right-sidebar.html">Stories Right Sidebar</a></li>
+                                    <li><a href="stories-left-sidebar.html">Stories Left Sidebar</a></li>
+                                    <li><a href="gallery.html">Gallery</a></li>
+                                    <li><a href="gallery-single.html">Gallery Single</a></li>
+                                    <li><a href="404.html">404 page</a></li>
+                                    <li><a href="static-page-right-sidebar.html">Static Page Right Sidebar</a></li>
+                                    <li><a href="static-page-left-sidebar.html">Static Page Left Sidebar</a></li>
+                                    <li><a href="about-us.html">About Us</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <div class="_title m_title">Blog</div>
+                                <ul>
+                                    <li><a href="blog-full-width.html">Blog Full With</a></li>
+                                    <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
+                                    <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
+                                    <li><a href="blog-search-results.html">Search Result</a></li>
+                                    <li><a href="blog-search-results-not-found.html">Search Nothing Found</a></li>
+                                    <li><a href="blog-single-right-sidebar.html">Blog Single Right Sidebar</a></li>
+                                    <li><a href="blog-single-left-sidebar.html">Blog Single Left Sidebar</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="_title">Contacts</div>
+                            <div class="contacts_info">
+                                <div class="tel">
+                                    <a href="tel:+19092020119">+ 1909 202 0119</a>
+                                    <p>Round the clock support</p>
+                                </div>
+                                <div class="email">
+                                    <a href="mailto:info@hellodigi.ru">info@hellodigi.ru</a>
+                                    <p>For any questions</p>
+                                </div>
+                                <div class="address">
+                                    1355 Digistrict St, Suite 909 San, Francisco, CA 10001 <br> United States
+                                </div>
+                            </div>
+                            <div class="socials social-links">
+                                <a href="#" class="link facebook"><span></span></a>
+                                <a href="#" class="link instagram"><span></span></a>
+                                <a href="#" class="link pinterest"><span></span></a>
+                                <a href="#" class="link twitter"><span></span></a>
+                                <a href="#" class="link youtube"><span></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer_bottom">
+                        <div class="left">
+                            <a href="#">Privacy Policy</a>
+                        </div>
+                        <div class="right">
+                            Copyright © 2019 by Digistrict
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!--Footer part-->
+
+
+
+
+
+
+    </div>
+    <!-- Parent container-->
+<div class="overlay" id="overlay"></div>
+
+    <div class="popup login" id="login">
+        <div class="scroll">
+            <div class="scroll_wrap">
+                <div class="popup-head">
+                    <div class="title">Sign In</div>
+                    <a class="link js-popup-open" data-href="#registration">Sign Up</a>
+
+                </div>
+                <div class="popup-body">
+                    <div class="subtitle">
+                        Use the e-mail and password that you specified when registering on the site
+                    </div>
+                    <div class="form">
+                        <input type="text" class="input" placeholder="Login">
+                        <input type="text" class="input" placeholder="Password">
+                        <button class="submit button">Sign In</button>
+                        <a href="#" class="link">Forgot password?</a>
+                    </div>
+                </div>
+                <div class="popup-foot">
+                    <p>Login via social networks</p>
+                    <div class="social-links">
+                        <a href="#" class="link facebook"><span></span></a>
+                        <a href="#" class="link twitter"><span></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="close"></div>
+    </div>
+
+
+    <div class="popup registration" id="registration">
+        <div class="scroll">
+            <div class="scroll_wrap">
+                <div class="popup-head">
+                    <div class="title">Sign Up</div>
+                    <a class="link js-popup-open" data-href="#login">Sign In</a>
+
+                </div>
+                <div class="popup-body">
+                    <div class="subtitle">
+                        Fill in the registration form and save your favorite tours, synchronize them on all devices
+                    </div>
+                    <div class="form"action="" method ="POST">
+                    {% csrf_token %}
+                        <input type="text" name="fName" class="input" placeholder="First Name">
+                        <input type="text" name="lName" class="input" placeholder="Last Name">
+                     
+                        <input type="email" name="inputEmail" class="input" placeholder="Email">
+                        <input type="password" name="inputPassword" class="input" placeholder="Password">
+                  
+                        <button type="submit" class="submit button js-submit">Registration</button>
+                    </div>
+                </div>
+                <div class="popup-foot">
+                    <p>Sign Up via social networks</p>
+                    <div class="social-links">
+                        <a href="#" class="link facebook"><span></span></a>
+                        <a href="#" class="link twitter"><span></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="close"></div>
+    </div>
+
+
+    <div class="popup forgot-pass" id="recovery-pass">
+        <div class="scroll">
+            <div class="scroll_wrap">
+                <div class="popup-head">
+                    <div class="title">Forgot password?</div>
+                </div>
+                <div class="popup-body">
+                    <div class="subtitle">
+                        Use the e-mail and password that you specified when registering on the site
+                    </div>
+                    <div class="form">
+                        <input type="email" class="input" placeholder="Email">
+                        <button class="submit button js-submit">Reset password</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="close"></div>
+    </div>
+
+
+    <div class="popup profile-setting" id="profile-setting">
+        <div class="scroll">
+            <div class="scroll_wrap">
+                <div class="select-userpic">
+                    <div class="userpic">V</div>
+                    <div class="select">
+                        <input type="file" id="profile-pic">
+                        <label for="profile-pic">Select photo</label>
+                    </div>
+                </div>
+                <div class="popup-head">
+                    <div class="title">Setting</div>
+                </div>
+                <div class="popup-body">
+                    <div class="form">
+                        <input type="text" class="input" placeholder="Username" value="Victor777">
+                        <input type="text" class="input" placeholder="Name" value="Victor">
+                        <input type="text" class="input" placeholder="Surename" value="Shibut">
+                        <input type="email" class="input" placeholder="Email" value="test@test.com">
+                        <div class="label">Change password</div>
+                        <input type="password" class="input" placeholder="Current password">
+                        <input type="password" class="input" placeholder="Enter new password">
+                        <input type="password" class="input" placeholder="New password repeat">
+                        <div class="label">Authorization through social networks</div>
+                        <div class="social-links">
+                            <a href="#" class="link facebook active"><span></span></a>
+                            <a href="#" class="link twitter"><span></span></a>
+                        </div>
+                        <button class="submit button js-submit">Save Setting</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="close"></div>
+    </div>
+
+
+    <div class="popup contact-us" id="contact-us">
+        <div class="scroll">
+            <div class="scroll_wrap">
+                <div class="popup-head">
+                    <div class="title">Contact Us</div>
+                </div>
+                <div class="popup-body">
+                    <div class="subtitle">
+                        But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain
+                    </div>
+                    <div class="form">
+                        <input type="text" class="input" placeholder="Name">
+                        <input type="email" class="input" placeholder="Email">
+                        <input type="text" class="input" placeholder="Phone">
+                        <textarea class="textarea" placeholder="Your Massage"></textarea>
+                        <button class="submit button js-submit">Send Massage</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="close"></div>
+    </div>
+
+    <div class="popup book-now-popup" id="book-now">
+        <div class="scroll">
+            <div class="scroll_wrap">
+                <div class="popup-head">
+                    <div class="title">Book Now</div>
+                </div>
+                <div class="popup-body">
+                    <div class="tour-title">
+                        <div class="img">
+                            <img src="img/demo-bg.jpg" alt="">
+                        </div>
+                        <div class="tour-name">
+                            Tour to the Arctic is an exotic journey on the verge of extreme
+                        </div>
+                    </div>
+                    <div class="tour-info">
+                        <div class="col">
+                            <div class="label">Check In</div>
+                            <div class="date">
+                                <div class="day">09</div>
+                                <div class="month">May</div>
+                                <div class="year">2019</div>
+                            </div>
+                            <div class="label">Aduld: <span>3</span></div>
+                        </div>
+                        <div class="col">
+                            <div class="label">Check Out</div>
+                            <div class="date">
+                                <div class="day">09</div>
+                                <div class="month">May</div>
+                                <div class="year">2019</div>
+                            </div>
+                            <div class="label">Children: <span>0</span></div>
+                        </div>
+                    </div>
+                    <div class="form">
+                        <input type="text" class="input" placeholder="Your First Name">
+                        <input type="text" class="input" placeholder="Your Last Name">
+                        <input type="email" class="input" placeholder="Your Email">
+                        <input type="tel" class="input" placeholder="Your Number Phone">
+                        <textarea class="textarea" placeholder="Where are your address?"></textarea>
+                        <textarea class="textarea" placeholder="Note:"></textarea>
+                        <button class="submit button js-submit">Book Now | <b>$356</b></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="close"></div>
+    </div>
+
+    <div class="popup success-popup" id="contact-us-success">
+        <div class="scroll">
+            <div class="scroll_wrap">
+                <div class="popup-head">
+                    <div class="title">Success</div>
+                </div>
+                <div class="popup-body">
+                    <div class="subtitle">
+                        Your message was successfully sent. We will contact you shortly
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="close"></div>
+    </div>
+
+
+
+
+ <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/lightgallery.js' %}"></script>
+    <script src="{% static 'js/jquery.mousewheel.min.js' %}"></script>
+    <script src="{% static 'js/slick.min.js' %}"></script>
+    <script src="{% static 'js/hammer.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+
+<body>
+</html>        

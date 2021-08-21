@@ -1,0 +1,248 @@
+
+{% extends "Base.html" %}
+
+
+{% load static %}
+{% block body %}
+
+
+
+
+    <div class="main_slider js_height">
+            <div class="slider_wrap" id="main_slider_wrap">
+            {% for trekcaats in trekcat %}
+                <div class="slide">
+                    <div class="bg-img" style="background-image: url({{trekcaats.cattegory_image.url}})"></div>
+                    <div class="wrap">
+                        <div class="wrap_float js_height">
+                            <div class="slide_content">
+                                <div class="title_wrap">
+                                    <p class="country">INDIA</p>
+                                    <h2 class="slide_title">{{trekcaats.category_name}}</h2>
+                                </div>
+                                <p class="text">
+                                   {{trekcaats.category_desc}}
+                                </p>
+                                <div class="buttons">
+                                    <a href="{% url 'choosetreck'%}?category={{trekcaats.category_name}}" class="btn button">Choose tour now</a>
+                                   
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+             
+
+                
+            </div>
+            <div class="arrows">
+                <div class="arrow prev"></div>
+                <div class="arrow next"></div>
+            </div>
+        </div>
+    </div>
+
+
+   <!-- Most Popular Trecks-->   
+
+   <div class="most_popular">
+            <div class="wrap">
+                <div class="wrap_float">
+                    <div class="title_wrap">
+                        <h2 class="title">Most Popular Trecks</h2>
+                        <p class="subtitle">
+                            Latin literature from 45 BC, making it over 2000 years old
+                        </p>
+                        <div class="controls">
+                            <a href="travel-list-right-sidebar.html" class="link">View All Tours</a>
+                            <div class="arrows">
+                                <div class="arrow prev"></div>
+                                <div class="arrow next"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section_content">
+                        <div class="tour-slider" id="tour-slider">
+                        {% for trecks in treck  %}
+                        
+                        
+                            <a href="{% url 'treck'%}?tid={{trecks.id}}" class="tour_item" style="background-image: url({{trecks.image.url}})">
+                                <div class="tour_item_top">
+                                    <p class="country">
+                                        <span>INDIA</span>
+                                    </p>
+                                   
+                                </div>
+                                <div class="tour_item_bottom">
+                                    <h3 class="_title">{{trecks.Name}}</h3>
+                                    <div class="_info">
+                                        <div class="_info_left">
+                                            <div class="days">{{trecks.days}} |</div>
+                                            <div class="cost">{{trecks.Price}}</div>
+                                        </div>
+                                        <div class="_info_right">
+                                            <div class="rating-stars">
+                                                <div class="star filled"></div>
+                                                <div class="star filled"></div>
+                                                <div class="star filled"></div>
+                                                <div class="star"></div>
+                                                <div class="star"></div>
+                                            </div>
+                                            <p class="rating-text">10 reviews</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="shadow js-shadow"></div>
+                            </a>
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>  
+<!--
+    All Destinations
+-->
+<div class="destinations">
+            <div class="wrap">
+                <div class="wrap_float">
+                    <div class="title_wrap">
+                        <h2 class="title">Top Destinations</h2>
+                        <p class="subtitle">
+                            This is the most popular destination in the last month
+                        </p>
+                        <div class="controls">
+                            <a href="travel-list-image-header.html" class="link">View All Destinations</a>
+                        </div>
+                    </div>
+                    <div class="section_content">
+                        <div class="scroll">
+                        {% for trecks in treck  %}
+                            <a href="travel-list-full-width.html" class="destinations_item" style="background-image: url({{trecks.image.url}})">
+                                <div class="sq_parent">
+                                    <div class="sq_wrap">
+                                        <div class="sq_content">
+                                            <div class="_content">
+                                                <h3 class="_title">{{trecks.Name}}</h3>
+                                                <p class="_info">{{trecks.location}} | {{trecks.days}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="shadow js-shadow"></div>
+                            </a>
+                        {% endfor %}    
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+
+<div class="blog">
+            <div class="wrap">
+                <div class="wrap_float">
+                    <div class="title_wrap">
+                        <h2 class="title">Recent Blog Posts</h2>
+                        <p class="subtitle">
+                            Watch and be inspired
+                        </p>
+                        <div class="controls">
+                            <a href="blog-right-sidebar.html" class="link">All Blog Posts</a>
+                        </div>
+                    </div>
+                    <div class="section_content">
+                        <a href="blog-single-right-sidebar.html" class="blog_item">
+                            <div class="blog_item_top" style="background-image: url(img/demo-bg.jpg);">
+                                <div class="sq_parent">
+                                    <div class="sq_wrap">
+                                        <div class="sq_content">
+                                            <div class="tags">
+                                                <div class="tag red">Stream</div>
+                                                <div class="tag green">Countries</div>
+                                            </div>
+                                            <h3 class="_title">
+                                                Most popular destinations destinations
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="shadow js-shadow"></div>
+                            </div>
+                            <div class="blog_item_bottom">
+                                <div class="author">
+                                    <div class="userpic">
+                                        <img src="img/demo-bg.jpg" alt="">
+                                    </div>
+                                    <div class="date">21.09.2019 by Maya Delia</div>
+                                </div>
+                                <p class="text">
+                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                                </p>
+                            </div>
+                        </a>
+
+                        <a href="blog-single-right-sidebar.html" class="blog_item">
+                            <div class="blog_item_top" style="background-image: url(img/demo-bg.jpg);">
+                                <div class="sq_parent">
+                                    <div class="sq_wrap">
+                                        <div class="sq_content">
+                                            <div class="tags">
+                                                <div class="tag blue">Video</div>
+                                            </div>
+                                            <h3 class="_title">
+                                                Most popular destinations destinations
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="shadow js-shadow"></div>
+                            </div>
+                            <div class="blog_item_bottom">
+                                <div class="author">
+                                    <div class="userpic">
+                                        <img src="img/demo-bg.jpg" alt="">
+                                    </div>
+                                    <div class="date">20.09.2019 by Victor Shibut</div>
+                                </div>
+                                <p class="text">
+                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                                </p>
+                            </div>
+                        </a>
+
+                        <a href="blog-single-right-sidebar.html" class="blog_item">
+                            <div class="blog_item_top" style="background-image: url(img/demo-bg.jpg);">
+                                <div class="sq_parent">
+                                    <div class="sq_wrap">
+                                        <div class="sq_content">
+                                            <div class="tags">
+                                                <div class="tag black">Trips</div>
+                                            </div>
+                                            <h3 class="_title">
+                                                Most popular destinations destinations
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="shadow js-shadow"></div>
+                            </div>
+                            <div class="blog_item_bottom">
+                                <div class="author">
+                                    <div class="userpic">
+                                        <img src="img/demo-bg.jpg" alt="">
+                                    </div>
+                                    <div class="date">21.09.2019 by Maya Delia</div>
+                                </div>
+                                <p class="text">
+                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock body %}

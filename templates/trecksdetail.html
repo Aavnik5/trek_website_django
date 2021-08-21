@@ -1,0 +1,310 @@
+{% extends "Base.html" %}
+
+
+{% load static %}
+{% block body %}
+ <div class="tour_page right-sidebar">
+ {% for choose in choose_obj %}
+            <div class="tour_page_head" style="background-image: url({{choose.image.url}})">
+                <div class="breadcrumbs">
+                    <div class="wrap">
+                        <div class="wrap_float">
+                            <a href="#">Home</a>
+                            <span class="separator">/</span>
+                            <a href="#">Tour Page Right Sidebar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="header_content" id="head">
+                    <div class="wrap">
+                        <div class="wrap_float">
+                            <div class="top-info">
+                                <h1 class="country">{{choose.Name}}</h1>
+                                <h5 class="tour_title">
+                                    {{choose.short_desc}}
+                                </h5>
+                                <div class="controls">
+                                    <div class="add_bookmark fav-button">
+                                        <i class="is-added bouncy"></i>
+                                        <i class="not-added bouncy"></i>
+                                        <span class="fav-overlay"></span>
+                                    </div>
+                                    <div class="arrows" id="tour-head-slider-arrows">
+                                        <div class="arrow prev"></div>
+                                        <div class="arrow next"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slider_wrap">
+                                <div class="slider lightgallery" id="tour-head-slider">
+                                {% for trckimg in trck_img  %}
+                                <a href="{{trckimg.treckimage.url}}" class="slide">
+                                        <img src="{{trckimg.treckimage.url}}" alt="">
+                                    </a>
+                                {% endfor %}
+                                   
+                                </div>
+                            </div>
+                            <div class="bottom-info">
+                                <div class="bottom-info-left">
+                                    <div class="search-tour">
+                                        <div class="search-form">
+                                            <div class="num-col">
+                                                <div class="label">Height</div>
+                                               <div class="labe"> {{choose.height}}</div>
+                                            </div>
+                                            <div class="num-col">
+                                                <div class="label">Location</div>
+                                                 <div class="labe"> {{choose.location}}</div>
+                                               
+                                            </div>
+                                            <div class="num-col">
+                                                <div class="label">Age</div>
+                                               
+                                                   
+                                                 <div class="labe"> {{choose.age}}</div>
+                                               
+                                               
+                                               
+                                            </div>
+                                            <div class="num-col last">
+                                                <div class="label">Days</div>
+                                                  
+                                                   
+                                                 <div class="labe">{{choose.days}}</div>
+                                               
+                                               
+                                               
+                                            </div>
+                                        </div>
+                                        </div>
+                                  
+                                   
+                                
+                            
+                                
+                                </div>
+                                <div class="bottom-info-right">
+                                    <div class="info">
+                                        
+                                        <div class="cost"> From {{choose.Price}}</div>
+                                    </div>
+                                    {% if not request.user.is_authenticated  %}
+                                    <a class="btn button " href="{% url 'loginauth' %}">
+                                     <span> Login Now </span>
+                                     <span> for Booking </span>
+                               
+                                    </a>
+                                    
+                                    {% else %}
+                                    <a class="btn button " href="{% url 'booktreck'%}?tid={{choose.id}}">
+                                     <span>Book now</span>
+                               
+                                    </a>
+                                    {% endif %}
+                                   
+                                <span>Book now</span>
+                               
+                            </a>
+                                    <div class="rating">
+                                        <div class="rating-stars">
+                                            <div class="star filled"></div>
+                                            <div class="star filled"></div>
+                                            <div class="star filled"></div>
+                                            <div class="star"></div>
+                                            <div class="star"></div>
+                                        </div>
+                                        <div class="rating-text">10 reviews</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tour_page_body">
+                <div class="wrap">
+                    <div class="wrap_float">
+                        <div class="left_content">
+
+
+
+
+
+                            <div class="overview js-section content-block" id="overview">
+                                <h2 class="title">Overview</h2>
+                                <p class="description">
+                                   {{choose.long_desc}}
+                                </p>
+                                
+                            </div>
+                            <div class="included js-section content-block" id="included">
+                                <h2 class="title">Itinerary</h2>
+                               <div class="programm" id="programm-days">
+                           
+                                     {% for iter_obj in iter_obj %}
+                                    <div class="day_item">
+                                        <div class="day_item-head">
+                                            <div class="preview">
+                                                <div class="image">
+                                                    
+                                                </div>
+                                               
+                                            </div>
+                                            <div class="_title">{{iter_obj.Sitinerary}}</div>
+                                            
+                                        </div>
+                                       
+                                    </div>
+                                      {% endfor %}
+                                  
+
+                                </div>
+                            </div>
+                            <div class="location js-section content-block" id="location">
+                                <h3 class="title">Location</h3>
+                                <div class="map">
+                                    <!--                            <iframe src=""></iframe>-->
+                                    <div id='map' style='width: 400px; height: 300px;'></div>
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoiYWF2bmlrNSIsImEiOiJja3NpenFxa2YweDR1MnZtYmExMTRnaTQzIn0.xH8b1LFz_Bnd_LU-NayAZw';
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11'
+  });
+</script>
+
+                                </div>
+                            </div>
+                            
+                            <div class="comments-block js-section" id="reviews">
+                                <div class="title_wrap">
+                                    <div class="val">5.0</div>
+                                    <h2 class="title">Reviews</h2>
+                                    <div class="counter">12</div>
+                                </div>
+                                
+                                <div class="comments">
+                                    {% for rviess in rvies  %}
+                                    
+                                   
+                                    <div class="comment_item">
+                                        <div class="comment_item_top">
+                                            <p>
+                                              {{rviess.reviews}}
+                                            </p>
+                                        </div>
+                                        <div class="comment_item_bottom">
+                                            <div class="rating">
+                                                <div class="rating-stars">
+                                                    <div class="star filled"></div>
+                                                    <div class="star filled"></div>
+                                                    <div class="star filled"></div>
+                                                    <div class="star"></div>
+                                                    <div class="star"></div>
+                                                </div>
+                                                
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                     
+                                   {% endfor %}
+
+                                    
+                                        
+                                   
+                                </div>
+                              
+                                
+                            </div>
+                            <div class="write_comment">
+                            {% if not request.user.is_authenticated %}
+                             <form  method="POST"  >
+                             {% csrf_token %}
+                               
+                                
+                                    
+                                   
+                                <div class="bottom">
+                                    <div class="files">
+                                       <h2> Login now for Write your Reviews</h2>
+                                        
+                                    </div>
+                                    <a class="submit button " href="{% url 'loginauth' %}">Login Now
+                                    
+                                    </a>
+                                 
+                                </div>
+                                </form>
+                            {% else %}
+                           
+                             <form  method="POST"  >
+                             {% csrf_token %}
+                                <div class="top">
+                                    <h3 class="title">Write A Review</h3>
+                                    <div class="rating">
+                                        <div class="rating-text">Assigned Rating</div>
+                                        <div class="rating-stars stars user-rating" >
+                                            <div class="star" name="renumbaer" value="1"></div>
+                                            <div class="star" name="renumbaer" value="2"></div>
+                                            <div class="star"name="renumbaer" value="3"></div>
+                                            <div class="star"name="renumbaer" value="4"></div>
+                                            <div class="star" name="renumbaer"value="5"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <div class="center">
+                                    
+                                    <textarea class="textarea" name="write_revi" placeholder="Reviews"></textarea>
+                                </div>
+                                <div class="bottom">
+                                    <div class="files">
+                                       
+                                    </div>
+                                    <button class="submit button">Send</button>
+                                </div>
+                                </form>
+                                 {% endif %}
+                            </div>
+                        </div>
+                        <div class="right_content sidebar">
+                        
+
+
+                            <div class="navigation" id="sidebar-navigation">
+                                <ul>
+                                    <li><a class="active" href="#head">Photo / Video</a></li>
+                                    <li><a href="#overview">Overview</a></li>
+                                    <li><a href="#included">Itinerary</a></li>
+                                    <li><a href="#location">Location</a></li>
+                                    
+                                    <li><a href="#reviews">Reviews</a></li>
+                                </ul>
+                            </div>
+                            {% if not request.user.is_authenticated %}
+                            <a class="book-now button " href="{% url 'loginauth' %}">
+                                <span>Login now</span>
+                               
+                                <span class="cost">Book from {{choose.Price}}</span>
+                            </a>
+                            
+                            {% else %}
+                               <a class="book-now button " href="{% url 'booktreck'%}?tid={{choose.id}}">
+                                <span>Book now</span>
+                                <span class="cost">from {{choose.Price}}</span>
+                            </a>
+                            {% endif %}
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            {% endfor %}
+        </div>    
+
+
+{% endblock body %}
